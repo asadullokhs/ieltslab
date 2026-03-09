@@ -655,99 +655,119 @@ body {
 /* Container for the columns */
 .results-wall {
   background: linear-gradient(180deg, #0b0f1a, #060914);
-  padding: 140px 0;
+  padding: 120px 0;
   color: #fff;
   overflow: hidden;
 }
 
 .results-inner {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: auto;
   text-align: center;
 }
 
 .results-title {
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .results-desc {
-  max-width: 720px;
-  margin: 0 auto 80px;
-  font-size: 1.05rem;
-  color: #b6c2e2;
-  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto 70px;
+  font-size: 1rem;
+  color: #a8b3d9;
+  line-height: 1.6;
 }
-
-/* WALL */
 
 /* WALL GRID */
 .wall {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-  height: 620px;
-  padding: 0 24px;
+  gap: 18px;
+  height: 520px;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* TOP / BOTTOM FADE */
+.wall::before,
+.wall::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.wall::before {
+  top: 0;
+  background: linear-gradient(to bottom, #060914 0%, transparent 100%);
+}
+
+.wall::after {
+  bottom: 0;
+  background: linear-gradient(to top, #060914 0%, transparent 100%);
 }
 
 /* COLUMN */
 .column {
   position: relative;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 /* TRACK */
 .track {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  animation: scroll 40s linear infinite;
+  gap: 16px;
+  animation: scroll 26s linear infinite;
+  will-change: transform;
 }
+
 .column.fast .track {
-  animation-duration: 20s;
+  animation-duration: 18s;
 }
+
 .column.normal .track {
-  animation-duration: 15s;
+  animation-duration: 24s;
 }
+
 .column.slow .track {
-  animation-duration: 20s;
+  animation-duration: 30s;
 }
 
 /* CARDS */
 .track img {
   width: 100%;
-  height: 300px; /* elegant fixed height */
+  height: 200px;
   object-fit: cover;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(79, 209, 255, 0.15);
-  backdrop-filter: blur(8px);
-  transition: transform 0.35s ease;
+  border-radius: 14px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* HOVER PAUSE & LIFT */
+/* HOVER EFFECT */
 .result-card:hover img {
-  transform: scale(1.03);
-}
-.column .result-card:hover {
-  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
-/* PAUSE ONLY HOVERED CARD (JS needed) */
-.result-card:hover ~ .track {
+/* PAUSE COLUMN ON HOVER */
+.column:hover .track {
   animation-play-state: paused;
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 @keyframes scroll {
   from {
     transform: translateY(0);
   }
   to {
     transform: translateY(-50%);
-  } /* scroll up exactly half of the track (duplicate) */
+  }
 }
 
 /* RESPONSIVE */

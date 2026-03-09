@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
       resultsTitle: "Лаборатория результатов IELTS Lab",
       resultsDesc:
         "Мы работаем с фактами, цифрами и реальными результатами. Ниже — поток достижений наших студентов.",
-      
+
       // Footer
       footerContacts: "Контакты",
       footerLinks: "Ссылки",
-      footerLocation: "Где мы находимся",
+      footerCourses: "Курсы",
       footerCopyright: "© 2026 IELTS Lab. Все права защищены.",
       footerBy: "By Asadullokh",
     },
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Footer
       footerContacts: "Kontaktlar",
       footerLinks: "Havolalar",
-      footerLocation: "Qayerdamiz",
+      footerCourses: "Kurslar",
       footerCopyright: "© 2026 IELTS Lab. Barcha huquqlar himoyalangan.",
       footerBy: "By Asadullokh",
     },
@@ -151,8 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
       texts[lang].footerContacts;
     document.querySelector(".footer-column:nth-child(2) h3").textContent =
       texts[lang].footerLinks;
-    document.querySelector(".footer-column.footer-map h3").textContent =
-      texts[lang].footerLocation;
+    document.getElementById("footer-courses").textContent =
+      texts[lang].footerCourses;
     document.querySelector(".footer-bottom p:first-child").textContent =
       texts[lang].footerCopyright;
     document.querySelector(".footer-bottom p:last-child").textContent =
@@ -168,4 +168,121 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // DEFAULT
   setLanguage("ru");
+});
+
+const data = [
+  {
+    speed: "slow",
+    items: [
+      {
+        link: "https://www.instagram.com/p/DVGtXvTjHG_/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DVGtXvTjHG_/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DUWEjWiDMR3/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUWEjWiDMR3/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DUD4KeGjKq5/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUD4KeGjKq5/media/?size=l`,
+      },
+    ],
+  },
+  {
+    speed: "normal",
+    items: [
+      {
+        link: "https://www.instagram.com/p/DULtJ_ujOMo/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DULtJ_ujOMo/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DT5p64pjNEQ/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DT5p64pjNEQ/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DVBZO1mDIX2/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DVBZO1mDIX2/media/?size=l`,
+      },
+    ],
+  },
+  {
+    speed: "fast",
+    items: [
+      {
+        link: "https://www.instagram.com/p/DU3dgDsDPpj/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DU3dgDsDPpj/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DUgD2gGDC4f/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUgD2gGDC4f/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DUGgflhDM60/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUGgflhDM60/media/?size=l`,
+      },
+    ],
+  },
+  {
+    speed: "normal",
+    items: [
+      {
+        link: "https://www.instagram.com/p/DVGtXvTjHG_/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DVGtXvTjHG_/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DUWEjWiDMR3/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUWEjWiDMR3/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DULtJ_ujOMo/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DULtJ_ujOMo/media/?size=l`,
+      },
+    ],
+  },
+  {
+    speed: "slow",
+    items: [
+      {
+        link: "https://www.instagram.com/p/DUD4KeGjKq5/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUD4KeGjKq5/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DT5p64pjNEQ/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DT5p64pjNEQ/media/?size=l`,
+      },
+      {
+        link: "https://www.instagram.com/p/DUgD2gGDC4f/",
+        img: `https://images.weserv.nl/?url=instagram.com/p/DUgD2gGDC4f/media/?size=l`,
+      },
+    ],
+  },
+];
+
+const wall = document.getElementById("wall");
+
+data.forEach((col) => {
+  const column = document.createElement("div");
+  column.className = `column ${col.speed}`;
+
+  const track = document.createElement("div");
+  track.className = "track";
+
+  // duplicate items for infinite scroll effect
+  const items = [...col.items, ...col.items];
+
+  items.forEach((item) => {
+    const a = document.createElement("a");
+    a.href = item.link;
+    a.target = "_blank";
+    a.className = "result-card";
+
+    const img = document.createElement("img");
+    img.src = item.img;
+
+    a.appendChild(img);
+    track.appendChild(a);
+  });
+
+  column.appendChild(track);
+  wall.appendChild(column);
 });
